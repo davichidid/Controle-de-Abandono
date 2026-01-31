@@ -1,4 +1,4 @@
-* **Controle de Abandono e Eficiência Operacional**
+# Controle de Abandono e Eficiência Operacional
   
 Esta query tem como objetivo mensurar a assertividade e eficácia do fluxo de atendimento ao cliente, visando reduzir o abandono de interações que geram custos excedentes de telefonia ou canais digitais sem a efetivação do contato com o atendente.**
 
