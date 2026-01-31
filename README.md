@@ -16,3 +16,46 @@ O código atua como a extração de dados brutos (Raw Data) que alimenta uma est
 * **Multicanalidade:** Monitoramento aplicável a discadores, fluxos receptivos (0800), Agentes Virtuais e ferramentas de negociação.
 
 
+```
+SELECT
+    DATEPART(HOUR, [VW_FLUXO_LIGACOES_REALTIME].[INICIO_ATENDIMENTO]) AS [HORA_ATENDIMENTO],
+
+    -- Total de Chamadas Conectadas (Sucesso de atendimento)
+    COUNT(
+        CASE 
+            WHEN [VW_FLUXO_LIGACOES_REALTIME].[STATUS_LIGACAO] IN (
+                'ATENDIMENTO_AGENTE',
+                'ATENDIMENTO_CLIENTE',
+                'ATENDIMENTO_SISTEMA'
+            )
+            THEN 1
+        END
+    ) AS [TOTAL_ATENDIMENTOS],
+
+    -- Total de Chamadas de Abandono (Perdidas em fila)
+    COUNT(
+        CASE 
+            WHEN [VW_FLUXO_LIGACOES_REALTIME].[STATUS_LIGACAO] IN (
+                'ABANDONO_FILA',
+                'TEMPO_MAXIMO_FILA',
+                'SEM_AGENTES_DISPONIVEIS',
+                'CHAMADA_CANCELADA',
+                'SOLICITACAO_CALLBACK'
+            )
+            THEN 1
+        END
+    ) AS [ABANDONO]
+
+FROM
+    [DB_OPERACIONAL].[SCHEMA_PLANNING].[VW_FLUXO_LIGACOES_REALTIME] WITH (NOLOCK)
+
+WHERE
+    [VW_FLUXO_LIGACOES_REALTIME].[CARTEIRA_ID] LIKE '%PROJETO_ESTRATEGICO%' 
+    AND CONVERT(VARCHAR(8), [VW_FLUXO_LIGACOES_REALTIME].[INICIO_ATENDIMENTO], 108) >= '08:00:00'
+
+GROUP BY
+    DATEPART(HOUR, [VW_FLUXO_LIGACOES_REALTIME].[INICIO_ATENDIMENTO])
+
+ORDER BY
+    [HORA_ATENDIMENTO];
+```
