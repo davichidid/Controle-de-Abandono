@@ -1,5 +1,5 @@
-* **Controle de Abandono e Eficiência Operacional**
-Esta query tem como objetivo mensurar a assertividade e eficácia do fluxo de atendimento ao cliente, visando reduzir o abandono de interações que geram custos excedentes de telefonia ou canais digitais sem a efetivação do contato com o atendente.
+* **Controle de Abandono e Eficiência Operacional
+Esta query tem como objetivo mensurar a assertividade e eficácia do fluxo de atendimento ao cliente, visando reduzir o abandono de interações que geram custos excedentes de telefonia ou canais digitais sem a efetivação do contato com o atendente.**
 
 * **Através deste script, é possível extrair uma síntese consolidada da representatividade do abandono em relação aos atendimentos de êxito, permitindo tanto uma análise em tempo real quanto uma visão retroativa.**
 
